@@ -3,6 +3,9 @@
   "displayName": "Bamakom",
   "description": "Render markdown inside the source code",
   "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/yoavmil/bamakom"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
