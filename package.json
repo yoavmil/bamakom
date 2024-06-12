@@ -6,6 +6,7 @@
   "repository": {
     "url": "https://github.com/yoavmil/bamakom"
   },
+  "license":"Apache-2.0",
   "engines": {
     "vscode": "^1.90.0"
   },
