@@ -1,22 +1,35 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import path from "path";
 import * as vscode from "vscode";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Congratulations, your extension "bamakom" is now active!');
-
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(
       { scheme: "file" },
       {
         provideHover(document, position, cancelToken) {
-          return provideMarkdownHover(document, position);
+          var hover = provideMarkdownHover(document, position);
+          return hover;
         },
       }
     )
   );
+}
+
+function getFolderUri(fileUri: vscode.Uri): vscode.Uri {
+  // Get the file path from the Uri
+  const filePath = fileUri.fsPath;
+
+  // Get the folder path using path.dirname
+  const folderPath = path.dirname(filePath);
+
+  // Create a new Uri from the folder path
+  const folderUri = vscode.Uri.file(folderPath);
+
+  return folderUri;
 }
 
 function provideMarkdownHover(
@@ -48,7 +61,11 @@ function provideMarkdownHover(
 
   // Create and return the hover
   const markdownString = new vscode.MarkdownString(markdownContent);
+
   markdownString.isTrusted = true;
+  markdownString.baseUri = getFolderUri(document.uri);
+  markdownString.supportHtml = true;
+  markdownString.supportThemeIcons = true;
 
   return new vscode.Hover(markdownString);
 }
