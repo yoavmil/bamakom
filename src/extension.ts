@@ -19,19 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-function getFolderUri(fileUri: vscode.Uri): vscode.Uri {
-  // Get the file path from the Uri
-  const filePath = fileUri.fsPath;
-
-  // Get the folder path using path.dirname
-  const folderPath = path.dirname(filePath);
-
-  // Create a new Uri from the folder path
-  const folderUri = vscode.Uri.file(folderPath);
-
-  return folderUri;
-}
-
 function provideMarkdownHover(
   document: vscode.TextDocument,
   position: vscode.Position
@@ -63,10 +50,9 @@ function provideMarkdownHover(
   const markdownString = new vscode.MarkdownString(markdownContent);
 
   markdownString.isTrusted = true;
-  markdownString.baseUri = getFolderUri(document.uri);
+  markdownString.baseUri = document.uri;
   markdownString.supportHtml = true;
   markdownString.supportThemeIcons = true;
-
   return new vscode.Hover(markdownString);
 }
 

@@ -1,6 +1,6 @@
 # `Bamakom`
 
-A VSCode extension that displays markdown within code files exactly where it is needed.
+A VSCode extension that displays markdown within code files, exactly where it is needed.
 
 ## Features
 
@@ -26,3 +26,5 @@ Images links should be relative to the source file folder.
   real bummer. Internally the [VS Code markdown renderer](https://code.visualstudio.com/api/references/vscode-api#Hover) does
   the work, but I cant find out how to make it render everything.
 
+TODO
+- check if there are closing tags
